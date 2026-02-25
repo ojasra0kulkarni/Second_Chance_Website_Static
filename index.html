@@ -428,11 +428,8 @@
                 expectations: document.getElementById('fexp').value
             };
 
-            // We explicitly specify the exact URL in the fetch. If hosted on render, we would change this or use a relative /api/submit path if the frontend and backend are hosted together. 
-            // Often, for local testing we hardcode the local flask server path. For prod, we can just use `/api/submit` if they are on same origin or use the full Render URL. Let's use the local URL for local testing, then explain how to deploy.
-            const apiUrl = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-                ? 'http://127.0.0.1:5000/api/submit'
-                : 'https://punar-milan-backend.onrender.com/api/submit'; // Placeholder for prod render URL
+            // Use the live production Render backend API URL
+            const apiUrl = 'https://punar-milan-backend.onrender.com/api/submit';
 
             fetch(apiUrl, {
                 method: 'POST',
