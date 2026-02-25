@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punar Milan | Second Chances</title>
+    <meta name="description" content="A warm platform celebrating second marriages in India.">
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- CSS Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mustard: { DEFAULT: '#E6B800', soft: '#FDE68A', dark: '#C49A00' },
+                        cream: '#FFF9E6', warmwhite: '#FEFEF6',
+                        saffron: '#FFCC80', deep: '#4A2C0B', hope: '#A3E4A0',
+                    },
+                    fontFamily: { playfair: ['"Playfair Display"', 'serif'], inter: ['"Inter"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Styles -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-nav { @apply bg-cream/90 backdrop-blur-md shadow-sm; }
+            .heading-accent::after { content:''; @apply absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-mustard rounded-full; }
+        }
+        body { @apply bg-cream text-deep font-inter antialiased overflow-x-hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FFF9E6; }
+        ::-webkit-scrollbar-thumb { background: #E6B800; border-radius: 4px; }
+        .form-input { @apply w-full border-b-2 border-mustard/30 bg-transparent py-2 pt-4 outline-none transition-all focus:border-mustard focus:ring-0; }
+        .form-label { @apply absolute left-0 top-4 text-deep/60 transition-all pointer-events-none; }
+        .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label { @apply -translate-y-5 text-xs text-mustard; }
+        .particle { position: absolute; pointer-events: none; animation: floatUp linear infinite; }
+        @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 20% { opacity: 0.6; } 80% { opacity: 0.6; } 100% { transform: translateY(-20vh) scale(1.2) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 py-4 glass-nav transition-all border-b border-mustard/20" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <svg class="w-6 h-6 text-mustard group-hover:scale-110 transition-transform" viewBox="0 0 24 24"
+                    fill="currentColor">
+                    <path d="M12 2c0 0-2 5-6 7-4 2-4 6-1 9 3 3 7 0 7 0s4 3 7 0c3-3 3-7-1-9-4-2-6-7-6-7z" />
+                </svg>
+                <span class="font-playfair text-xl font-bold">Punar Milan</span>
+            </a>
+            <div class="hidden md:flex gap-8 items-center font-medium">
+                <a href="#story" class="hover:text-mustard transition-colors">Our Story</a>
+                <a href="#stories" class="hover:text-mustard transition-colors">Success Stories</a>
+                <a href="#whyus" class="hover:text-mustard transition-colors">Why Us</a>
+                <a href="#join"
+                    class="px-6 py-2 bg-gradient-to-r from-mustard to-mustard-dark text-white rounded-full shadow-md hover:-translate-y-0.5 transition-all">Start
+                    Your Journey</a>
+            </div>
+            <button class="md:hidden" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobileMenu"
+            class="hidden absolute top-full left-0 w-full bg-cream border-t border-mustard/20 shadow-lg flex-col py-4 px-6 gap-4 items-start md:hidden">
+            <a href="#story" class="w-full py-2 border-b border-mustard/10 menu-link">Our Story</a>
+            <a href="#stories" class="w-full py-2 border-b border-mustard/10 menu-link">Success Stories</a>
+            <a href="#whyus" class="w-full py-2 border-b border-mustard/10 menu-link">Why Us</a>
+            <a href="#join" class="w-full py-2 text-mustard font-semibold menu-link">Start Your Journey</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Image: Happy 40+ Indian couple, golden hour -->
+        <img src="image5.png" alt="Happy Indian couple in golden light"
+            class="absolute inset-0 w-full h-full object-cover">
+        <div id="particles" class="absolute inset-0 z-10 overflow-hidden pointer-events-none"></div>
+
+        <div class="relative z-20 text-center px-4 pt-64 flex flex-col justify-end h-full pb-24" data-aos="fade-up"
+            data-aos-duration="1200">
+            <h2 class="font-playfair text-2xl md:text-4xl text-warmwhite drop-shadow-md mb-6 italic">Second chances are
+                the most beautiful</h2>
+            <p class="font-inter text-lg text-white/90 max-w-2xl mx-auto mb-10 drop-shadow">Finding love again, the
+                Indian way. Because your heart deserves a new beginning.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#join"
+                    class="px-8 py-4 bg-mustard hover:bg-mustard-dark text-white rounded-full text-lg shadow-lg hover:-translate-y-1 transition-transform flex justify-center items-center gap-2 group">
+                    I Want to Join
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+                <a href="#stories"
+                    class="px-8 py-4 bg-white/20 backdrop-blur border border-white/40 text-white rounded-full text-lg hover:bg-white/30 hover:-translate-y-1 transition-all flex justify-center items-center gap-2">Watch
+                    Real Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section id="story" class="py-20 bg-warmwhite relative">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="font-playfair text-4xl font-bold heading-accent relative inline-block mb-10" data-aos="fade-up">
+                Why Punar Milan Exists</h2>
+            <p class="text-lg text-deep/80 leading-relaxed mb-16 max-w-3xl mx-auto" data-aos="fade-up"
+                data-aos-delay="100">
+                In India, the taboo around second marriages for divorced and widowed individuals prevents many from
+                finding happiness again. Punar Milan changes this with empathy and deep respect, creating a safe space
+                for renewed hope.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-mustard-soft hover:-translate-y-2 transition-transform"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="w-16 h-16 bg-mustard-soft/50 rounded-full flex items-center justify-center mx-auto mb-4 text-mustard-dark">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-playfair text-xl font-semibold mb-2">Family</h3>
+                    <p class="text-sm text-deep/70">Connecting gentle hearts and understanding families.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-mustard-soft hover:-translate-y-2 transition-transform"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="w-16 h-16 bg-mustard-soft/50 rounded-full flex items-center justify-center mx-auto mb-4 text-mustard-dark">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-playfair text-xl font-semibold mb-2">Trust</h3>
+                    <p class="text-sm text-deep/70">Verifed profiles ensuring authentic connections.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-mustard-soft hover:-translate-y-2 transition-transform"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <div
+                        class="w-16 h-16 bg-mustard-soft/50 rounded-full flex items-center justify-center mx-auto mb-4 text-mustard-dark">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-playfair text-xl font-semibold mb-2">Hope</h3>
+                    <p class="text-sm text-deep/70">A supportive community celebrating new chapters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section id="stories" class="py-20 bg-mustard-soft/20 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-center font-playfair text-4xl font-bold heading-accent relative inline-block mb-12 block mx-auto"
+                data-aos="fade-up">Beautiful Beginnings</h2>
+
+            <div class="swiper storiesSwiper overflow-hidden pb-12" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <script>
+                        const stories = [
+                            { src: "image1.png" },
+                            { src: "image2.jpg" },
+                            { src: "image3.jpg" },
+                            { src: "image4.png" }
+                        ];
+                        stories.forEach(s => {
+                            document.write(`
+                            <div class="swiper-slide h-auto">
+                                <div class="bg-white p-2 rounded-2xl shadow-sm border border-mustard/20 h-[500px] md:h-[600px] flex flex-col group hover:shadow-md transition-all overflow-hidden relative">
+                                     <img src="${s.src}" class="absolute inset-0 w-full h-full object-cover rounded-xl transition-transform duration-1000 group-hover:scale-105" alt="Beautiful Beginning">
+                                </div>
+                            </div>`);
+                        });
+                    </script>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Grid -->
+    <section id="whyus" class="py-20 bg-cream">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-center font-playfair text-4xl font-bold heading-accent relative inline-block mb-12 block mx-auto"
+                data-aos="fade-up">Why Choose Us</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <script>
+                    const features = [
+                        { title: "Verified & Safe", desc: "100% genuine, secure profiles.", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
+                        { title: "Family-First", desc: "Algorithmic matching for values.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+                        { title: "Expert Counselors", desc: "Guidance when you need it.", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" },
+                        { title: "Private & Respectful", desc: "Discreet and secure sharing.", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" }
+                    ];
+                    features.forEach((f, i) => {
+                        document.write(`
+                        <div class="bg-warmwhite p-6 rounded-2xl shadow-sm border border-mustard/20 hover:-translate-y-2 hover:shadow-lg transition-all" data-aos="fade-up" data-aos-delay="${i * 100}">
+                            <svg class="w-8 h-8 text-mustard mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${f.icon}"/></svg>
+                            <h3 class="font-playfair text-xl font-bold mb-2">${f.title}</h3>
+                            <p class="text-sm text-deep/70">${f.desc}</p>
+                        </div>`);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="join" class="py-20 bg-warmwhite border-t border-mustard/20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <svg class="w-10 h-10 mx-auto text-mustard animate-pulse mb-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2c0 0-2 5-6 7-4 2-4 6-1 9 3 3 7 0 7 0s4 3 7 0c3-3 3-7-1-9-4-2-6-7-6-7z" />
+                </svg>
+                <h2 class="font-playfair text-4xl font-bold mb-4">Begin Your New Chapter</h2>
+            </div>
+
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-mustard/10" data-aos="fade-up"
+                data-aos-delay="100">
+                <form id="regForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div class="relative"><input type="text" id="fname" required class="form-input"
+                                placeholder=" "><label class="form-label">Full Name *</label></div>
+                        <div class="relative"><input type="email" id="femail" required class="form-input"
+                                placeholder=" "><label class="form-label">Email *</label></div>
+                        <div class="relative"><input type="number" id="fage" required class="form-input" placeholder=" "
+                                min="30" max="80"><label class="form-label">Age *</label></div>
+                        <div class="relative">
+                            <select id="fgender" required class="form-input">
+                                <option value="" disabled selected></option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <label class="form-label">Gender *</label>
+                        </div>
+                        <div class="relative"><input type="text" id="fheight" required class="form-input"
+                                placeholder="eg. 5ft 6in"><label class="form-label">Height (ft & in) *</label></div>
+                        <div class="relative"><input type="number" id="fweight" required class="form-input"
+                                placeholder=" "><label class="form-label">Weight (kg) *</label></div>
+                        <div class="relative"><input type="text" id="fcaste" required class="form-input"
+                                placeholder=" "><label class="form-label">Caste *</label></div>
+                        <div class="relative"><input type="text" id="freligion" required class="form-input"
+                                placeholder=" "><label class="form-label">Religion *</label></div>
+                        <div class="relative"><input type="text" id="ftongue" required class="form-input"
+                                placeholder=" "><label class="form-label">Mother Tongue *</label></div>
+                        <div class="relative"><input type="tel" id="fphone" required class="form-input" placeholder=" "
+                                pattern="^\+91[0-9]{10}$" title="+91 followed by 10 digits"><label
+                                class="form-label">Phone (+91...) *</label></div>
+                        <div class="relative">
+                            <select id="fstate" required class="form-input">
+                                <option value="" disabled selected></option>
+                                <option>Delhi</option>
+                                <option>Maharashtra</option>
+                                <option>Karnataka</option>
+                                <option>Gujarat</option>
+                                <option>Other</option>
+                            </select>
+                            <label class="form-label">State *</label>
+                        </div>
+                        <div class="relative"><input type="text" id="fcity" required class="form-input"
+                                placeholder=" "><label class="form-label">City *</label></div>
+                        <div class="relative">
+                            <select id="fstatus" required class="form-input">
+                                <option value="" disabled selected></option>
+                                <option>Divorced</option>
+                                <option>Widowed</option>
+                                <option>Separated</option>
+                            </select>
+                            <label class="form-label">Marital Status *</label>
+                        </div>
+                        <div class="relative">
+                            <select id="fchild" required class="form-input"
+                                onchange="document.getElementById('cnum').style.display=this.value==='Yes'?'block':'none'">
+                                <option value="" disabled selected></option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                            <label class="form-label">Children? *</label>
+                        </div>
+                        <div class="relative hidden" id="cnum"><input type="number" class="form-input"
+                                placeholder=" "><label class="form-label">Number of Children</label></div>
+                        <div class="relative"><input type="text" id="focc" required class="form-input"
+                                placeholder=" "><label class="form-label">Occupation *</label></div>
+                        <div class="relative"><input type="text" id="fedu" required class="form-input"
+                                placeholder=" "><label class="form-label">Education *</label></div>
+                    </div>
+                    <div class="relative pt-4"><textarea id="fbio" required class="form-input resize-none h-24"
+                            placeholder=" "></textarea><label class="form-label">Short Bio (150 words) *</label></div>
+                    <div class="relative pt-4"><textarea id="fexp" required class="form-input resize-none h-24"
+                            placeholder=" "></textarea><label class="form-label">What I'm Looking For *</label></div>
+
+                    <div class="pt-4 border-t border-mustard/20">
+                        <label class="block text-sm text-deep/60 mb-2">Upload Profile Photo *</label>
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full border border-mustard overflow-hidden flex items-center justify-center bg-cream preview-cont relative cursor-pointer"
+                                onclick="document.getElementById('ffile').click()">
+                                <img id="preview" src="" class="w-full h-full object-cover hidden">
+                                <svg id="camIco" class="w-6 h-6 text-mustard" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                </svg>
+                            </div>
+                            <input type="file" id="ffile" required accept="image/*" class="hidden"
+                                onchange="if(this.files[0]){const p = document.getElementById('preview'); p.src=URL.createObjectURL(this.files[0]); p.classList.remove('hidden'); document.getElementById('camIco').classList.add('hidden');}">
+                            <button type="button"
+                                class="text-sm py-2 px-4 border border-mustard text-mustard rounded-full hover:bg-mustard hover:text-white transition"
+                                onclick="document.getElementById('ffile').click()">Choose Photo</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-8">
+                        <button type="submit" id="sbtn"
+                            class="px-8 py-4 bg-gradient-to-r from-mustard to-mustard-dark text-white rounded-full font-medium shadow-md hover:-translate-y-1 transition flex items-center gap-2 mx-auto">
+                            Submit My Profile – I’m Ready for Love Again <span id="spinner"
+                                class="hidden w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep text-cream/70 py-10 border-t border-mustard/30 text-center">
+        <svg class="w-8 h-8 text-mustard mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2c0 0-2 5-6 7-4 2-4 6-1 9 3 3 7 0 7 0s4 3 7 0c3-3 3-7-1-9-4-2-6-7-6-7z" />
+        </svg>
+        <p class="mb-2 italic">Made with love for every heart that believes in second chances.</p>
+        <p class="text-sm">&copy; 2024 Punar Milan. Privacy Policy &bull; Terms</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal"
+        class="fixed inset-0 bg-cream/95 backdrop-blur z-[100] hidden items-center justify-center -translate-y-4 opacity-0 transition-all duration-500">
+        <div class="bg-white p-8 rounded-3xl max-w-md mx-4 text-center shadow-2xl border border-mustard/30">
+            <h3 class="font-playfair text-3xl font-bold text-deep mb-2">Namaste!</h3>
+            <p class="text-mustard-dark font-medium mb-4">Welcome to your beautiful second chapter ❤️</p>
+            <p class="text-sm text-deep/80 mb-6">We know taking this step takes immense courage. Your profile has been
+                lovingly received. Our team will personally review it and connect you with genuine matches who respect
+                your journey.<br><br>Every ending is a new beginning. Yours starts today.<br><br><span
+                    class="italic text-mustard-dark">With warmth & hope,<br>The Punar Milan Family 🌼</span></p>
+            <button onclick="closeModal()"
+                class="w-full py-3 bg-mustard text-white rounded-full font-medium hover:bg-mustard-dark transition">Back
+                to Home</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        AOS.init({ once: true });
+        new Swiper('.storiesSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 1000,
+            autoplay: { delay: 2000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true }
+        });
+
+        // Particles (Lotus petals)
+        const pCont = document.getElementById('particles');
+        const svgs = ['<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c0 0-2 5-6 7-4 2-4 6-1 9 3 3 7 0 7 0s4 3 7 0c3-3 3-7-1-9-4-2-6-7-6-7z"/></svg>'];
+        for (let i = 0; i < 15; i++) {
+            let el = document.createElement('div');
+            el.className = 'particle text-mustard/30 w-4 h-4';
+            el.innerHTML = svgs[0];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            el.style.animationDelay = (Math.random() * 5) + 's';
+            pCont.appendChild(el);
+        }
+
+        // Nav scroll & Mobile Menu
+        window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('border-b-transparent', window.scrollY < 50); });
+        const mm = document.getElementById('mobileMenu');
+        document.getElementById('mobileMenuBtn').onclick = () => mm.classList.toggle('hidden');
+        document.querySelectorAll('.menu-link').forEach(l => l.onclick = () => mm.classList.add('hidden'));
+
+        // Form Submit
+        document.getElementById('regForm').onsubmit = (e) => {
+            e.preventDefault();
+            document.getElementById('spinner').classList.remove('hidden');
+
+            // Build the data payload object exactly matching the Flask schema
+            const data = {
+                full_name: document.getElementById('fname').value,
+                email: document.getElementById('femail').value,
+                age: document.getElementById('fage').value,
+                gender: document.getElementById('fgender').value,
+                height: document.getElementById('fheight').value,
+                weight: document.getElementById('fweight').value,
+                caste: document.getElementById('fcaste').value,
+                religion: document.getElementById('freligion').value,
+                mother_tongue: document.getElementById('ftongue').value,
+                phone: document.getElementById('fphone').value,
+                state: document.getElementById('fstate').value,
+                city: document.getElementById('fcity').value,
+                marital_status: document.getElementById('fstatus').value,
+                children: document.getElementById('fchild').value,
+                num_children: document.getElementById('fchild').value === 'Yes' ? document.getElementById('cnum').querySelector('input').value : null,
+                occupation: document.getElementById('focc').value,
+                education: document.getElementById('fedu').value,
+                bio: document.getElementById('fbio').value,
+                expectations: document.getElementById('fexp').value
+            };
+
+            // We explicitly specify the exact URL in the fetch. If hosted on render, we would change this or use a relative /api/submit path if the frontend and backend are hosted together. 
+            // Often, for local testing we hardcode the local flask server path. For prod, we can just use `/api/submit` if they are on same origin or use the full Render URL. Let's use the local URL for local testing, then explain how to deploy.
+            const apiUrl = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
+                ? 'http://127.0.0.1:5000/api/submit'
+                : 'https://punar-milan-backend.onrender.com/api/submit'; // Placeholder for prod render URL
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(result => {
+                    document.getElementById('spinner').classList.add('hidden');
+                    document.getElementById('regForm').reset();
+                    document.getElementById('cnum').style.display = 'none'; // reset conditional child field
+
+                    // Reset Image Preview
+                    const p = document.getElementById('preview');
+                    p.src = '';
+                    p.classList.add('hidden');
+                    document.getElementById('camIco').classList.remove('hidden');
+
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#E6B800', '#FDE68A', '#A3E4A0', '#FFCC80'] });
+                    const end = Date.now() + 4000;
+                    (function frame() { confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#E6B800'] }); confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#FDE68A'] }); if (Date.now() < end) requestAnimationFrame(frame); }());
+
+                    const m = document.getElementById('modal');
+                    m.classList.remove('hidden');
+                    setTimeout(() => { m.classList.remove('opacity-0', '-translate-y-4'); }, 10);
+                })
+                .catch(error => {
+                    document.getElementById('spinner').classList.add('hidden');
+                    alert("Something went wrong with the submission. Please try again.");
+                    console.error('Error:', error);
+                });
+        };
+
+        const closeModal = () => {
+            const m = document.getElementById('modal');
+            m.classList.add('opacity-0', '-translate-y-4');
+            setTimeout(() => { m.classList.add('hidden'); window.scrollTo(0, 0); }, 500);
+        }
+    </script>
+</body>
+
+</html>
