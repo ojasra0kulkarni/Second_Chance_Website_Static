@@ -1,18 +1,32 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from database import init_db, get_db_connection
-import os
-import sqlite3
+from supabase import create_client, Client
 
 app = Flask(__name__)
-# Enable CORS for local development matching the frontend
+# Enable CORS
 CORS(app)
 
-# Initialize the database and table if they don't exist
-init_db()
+# Supabase Setup
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+# Initialize Supabase client only if credentials exist
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        print("Successfully connected to Supabase.")
+    except Exception as e:
+        print(f"Error connecting to Supabase: {e}")
+else:
+    print("WARNING: SUPABASE_URL and SUPABASE_KEY environment variables are not set.")
 
 @app.route('/api/submit', methods=['POST'])
 def submit_profile():
+    if not supabase:
+        return jsonify({"error": "Database connection not configured. Please set Supabase environment variables."}), 500
+
     data = request.json
     
     if not data:
@@ -25,32 +39,41 @@ def submit_profile():
             return jsonify({"error": f"Missing required field: {field}"}), 400
 
     try:
-        conn = get_db_connection()
-        conn.execute('''
-            INSERT INTO profiles (
-                full_name, email, age, gender, height, weight, caste, religion, 
-                mother_tongue, phone, state, city, marital_status, children, 
-                num_children, occupation, education, bio, expectations
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            data['full_name'], data['email'], int(data['age']), data['gender'], 
-            data['height'], int(data['weight']), data['caste'], data['religion'], 
-            data['mother_tongue'], data['phone'], data['state'], data['city'], 
-            data['marital_status'], data['children'], 
-            data.get('num_children'), # Can be None/null if no children
-            data['occupation'], data['education'], data['bio'], data['expectations']
-        ))
-        conn.commit()
-        conn.close()
+        # Prepare data for insertion
+        insert_data = {
+            "full_name": data['full_name'],
+            "email": data['email'],
+            "age": int(data['age']),
+            "gender": data['gender'],
+            "height": data['height'],
+            "weight": int(data['weight']),
+            "caste": data['caste'],
+            "religion": data['religion'],
+            "mother_tongue": data['mother_tongue'],
+            "phone": data['phone'],
+            "state": data['state'],
+            "city": data['city'],
+            "marital_status": data['marital_status'],
+            "children": data['children'],
+            "num_children": int(data.get('num_children')) if data.get('num_children') else None,
+            "occupation": data['occupation'],
+            "education": data['education'],
+            "bio": data['bio'],
+            "expectations": data['expectations']
+        }
+
+        # Insert into Supabase table 'profiles'
+        response = supabase.table("profiles").insert(insert_data).execute()
         
         return jsonify({"status": "success", "message": "Profile submitted successfully"}), 201
 
-    except sqlite3.Error as e:
-        return jsonify({"error": f"Database error: {str(e)}"}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/healthz', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+
 if __name__ == '__main__':
-    # Use port 5000 by default but respect PORT environment variable (for Render)
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
